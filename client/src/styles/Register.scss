@@ -8,7 +8,7 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background: url("../../public/assets/register.jpg") center;
+  background: url("../../public/assets/b_g.jpg") center;
   background-size: cover;
 
   &_content {
@@ -17,15 +17,16 @@
     gap: 15px;
     width: 40%;
     padding: 40px;
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(0, 0, 0, 0.5); /* Adjusted transparency */
     border-radius: 20px;
+    animation: fadeIn 0.5s ease-in-out;
 
     @include lg {
-      width: 60%
+      width: 60%;
     }
 
     @include mm {
-      width: 80%
+      width: 80%;
     }
 
     &_form {
@@ -36,20 +37,19 @@
 
       input {
         width: 100%;
-        padding: 7px 15px;
-        background-color: transparent;
+        padding: 12px;
+        background-color: rgba(255, 255, 255, 0.1);
         border: none;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-        outline: none;
-        text-align: center;
+        border-radius: 5px;
         color: white;
+        transition: background-color 0.3s ease;
 
-        input:not(:placeholder-shown):focus {
-          background: transparent; /* or background: none; */
+        &:focus {
+          background-color: rgba(255, 255, 255, 0.2);
         }
 
         &::placeholder {
-          color: white;
+          color: rgba(255, 255, 255, 0.7);
         }
       }
 
@@ -66,17 +66,40 @@
         img {
           width: 25px;
         }
+
+        p {
+          margin: 0;
+        }
       }
 
       button {
         margin-top: 15px;
-
-        @include buttonStyle;
         width: 50%;
+        padding: 10px;
+        background-color: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        border-radius: 5px;
+        color: white;
+        cursor: pointer;
+        transition: all 0.3s ease;
 
         &:hover {
-          box-shadow: 0 0 10px 3px rgba(255, 255, 255);
+          transform: scale(1.05);
+          box-shadow: 0 0 10px 3px rgba(255, 255, 255, 0.5);
+          background-color: rgba(255, 255, 255, 0.2);
         }
+      
+
+        &:disabled {
+          background-color: rgba(255, 255, 255, 0.1);
+          border: 1px solid rgba(255, 255, 255, 0.3);
+          color: gray;
+          cursor: not-allowed;
+        }
+      }
+
+      img {
+        margin-top: 10px;
       }
     }
 
@@ -91,5 +114,36 @@
         text-decoration: underline;
       }
     }
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
   }
 }

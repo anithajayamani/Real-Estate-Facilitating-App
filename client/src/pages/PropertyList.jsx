@@ -48,6 +48,9 @@ const PropertyList = () => {
             category,
             type,
             price,
+            contactName,
+            contactPhone,
+            contactEmail,
             booking = false,
           }) => (
             <ListingCard
@@ -60,6 +63,9 @@ const PropertyList = () => {
               category={category}
               type={type}
               price={price}
+              contactName={contactName}
+              contactPhone={contactPhone}
+              contactEmail={contactEmail}
               booking={booking}
             />
           )

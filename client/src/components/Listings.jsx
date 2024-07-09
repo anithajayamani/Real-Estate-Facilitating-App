@@ -66,6 +66,9 @@ const Listings = () => {
               country,
               category,
               type,
+              contactName,
+              contactPhone,
+              contactEmail,
               price,
               booking=false
             }) => (
@@ -80,6 +83,9 @@ const Listings = () => {
                 type={type}
                 price={price}
                 booking={booking}
+                contactName={contactName}
+                contactPhone={contactPhone}
+                contactEmail={contactEmail}
               />
             )
           )}

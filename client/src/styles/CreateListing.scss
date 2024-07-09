@@ -377,6 +377,64 @@
       }
     }
   }
+  
+  
+    &_step3 {
+      background-color: white;
+      padding: 30px 40px;
+      border-radius: 20px;
+      margin-top: 40px;
+  
+      @include sm {
+        padding: 30px 20px;
+      }
+  
+      h2 {
+        color: $pinkred;
+      }
+  
+      hr {
+        margin: 15px 0 25px;
+      }
+  
+      .contact-info {
+        max-width: 700px;
+  
+        .half {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 40px;
+  
+          @include ml {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+          }
+        }
+  
+        .contact-field {
+          p {
+            font-weight: 700;
+            margin: 20px 0 10px;
+          }
+  
+          input {
+            border: 1px solid $grey;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            width: 100%;
+  
+            &:focus {
+              outline: none;
+            }
+          }
+        }
+      }
+    }
+  }
+  
 
   .submit_btn {
     margin-top: 40px;
@@ -387,4 +445,3 @@
       box-shadow: 0 0 10px 3px rgb(117, 117, 117);
     }
   }
-}

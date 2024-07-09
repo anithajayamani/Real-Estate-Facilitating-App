@@ -1,4 +1,4 @@
-import { TbBeach, TbMountain, TbPool } from "react-icons/tb";
+import { TbBeach, TbMountain} from "react-icons/tb";
 import {
   GiBarn,
   GiBoatFishing,
@@ -8,41 +8,39 @@ import {
   GiForestCamp,
   GiIsland,
   GiWindmill,
+  GiPlantSeed,
+  GiChemicalDrop,
+  GiWaterDrop,
+  GiGroundSprout,
+  GiDroplets,
+  GiWaterTank,
+  GiStonePile,
+  GiEarthAmerica,
+  GiMoneyStack,
+  GiSeaCliff,
+  GiVillage,
+  GiFactory,
+  GiHedgehog,
+  GiPencilRuler
 } from "react-icons/gi";
 import {
   FaSkiing,
-  FaPumpSoap,
-  FaShower,
-  FaFireExtinguisher,
-  FaUmbrellaBeach,
-  FaKey,
+  FaSeedling,
+  FaRuler,
+  FaMap,
+  FaTree,
+  FaMapMarkedAlt,
+  FaLeaf,
+  FaCity,
+  FaCertificate,
 } from "react-icons/fa";
-import { FaHouseUser, FaPeopleRoof, FaKitchenSet } from "react-icons/fa6";
+import {FaMoneyBill1Wave } from "react-icons/fa6";
 import {
-  BiSolidWasher,
-  BiSolidDryer,
-  BiSolidFirstAid,
-  BiWifi,
-  BiSolidFridge,
   BiWorld,
 } from "react-icons/bi";
-import { BsSnow, BsFillDoorOpenFill, BsPersonWorkspace } from "react-icons/bs";
-import { IoDiamond } from "react-icons/io5";
-import { MdOutlineVilla, MdMicrowave, MdBalcony, MdYard, MdPets } from "react-icons/md";
-import {
-  PiBathtubFill,
-  PiCoatHangerFill,
-  PiTelevisionFill,
-} from "react-icons/pi";
-import { TbIroning3 } from "react-icons/tb";
-import {
-  GiHeatHaze,
-  GiCctvCamera,
-  GiBarbecue,
-  GiToaster,
-  GiCampfire,
-} from "react-icons/gi";
-import { AiFillCar } from "react-icons/ai";
+import { BsSnow, BsFillDoorOpenFill, } from "react-icons/bs";
+import { MdOutlineVilla, MdHotel, MdLineStyle } from "react-icons/md";
+
 
 export const categories = [
   {
@@ -72,12 +70,6 @@ export const categories = [
     label: "Countryside",
     icon: <TbMountain />,
     description: "This property is in the countryside!",
-  },
-  {
-    img: "assets/pool_cat.jpg",
-    label: "Amazing Pools",
-    icon: <TbPool />,
-    description: "This is property has a beautiful pool!",
   },
   {
     img: "assets/island_cat.webp",
@@ -133,141 +125,129 @@ export const categories = [
     icon: <GiBarn />,
     description: "This property is in a barn!",
   },
-  {
-    img: "assets/lux_cat.jpg",
-    label: "Luxury",
-    icon: <IoDiamond />,
-    description: "This property is brand new and luxurious!",
-  },
 ];
 
 export const types = [
   {
-    name: "An entire place",
-    description: "Guests have the whole place to themselves",
-    icon: <FaHouseUser />,
+    name: "Buying entire Land",
+    description: "Buyers have the whole place to themselves",
+    icon: <GiEarthAmerica />,
   },
   {
-    name: "Room(s)",
-    description:
-      "Guests have their own room in a house, plus access to shared places",
+    name: "Rent the entire Land",
+    description:"Buyers can rent the land for certain period for certain purpose",
     icon: <BsFillDoorOpenFill />,
   },
   {
-    name: "A Shared Room",
-    description:
-      "Guests sleep in a room or common area that maybe shared with you or others",
-    icon: <FaPeopleRoof />,
+    name: "An Agricultural Land",
+    description: "Buying Land for Agricultural purpose",
+    icon: <FaSeedling />,
   },
 ];
 
 export const facilities = [
   {
-    name: "Bath tub",
-    icon: <PiBathtubFill />,
+    name: "Soil Type",
+    icon: <GiPlantSeed />,
   },
   {
-    name: "Personal care products",
-    icon: <FaPumpSoap />,
+    name: "Soil Fertility",
+    icon: <FaSeedling />,
   },
   {
-    name: "Outdoor shower",
-    icon: <FaShower />,
+    name: "PH Level",
+    icon: <GiChemicalDrop />,
   },
   {
-    name: "Washer",
-    icon: <BiSolidWasher />,
+    name: "Water Level",
+    icon: <GiWaterDrop />,
   },
   {
-    name: "Dryer",
-    icon: <BiSolidDryer />,
+    name: "Hospitality",
+    icon: <MdHotel />,
   },
   {
-    name: "Hangers",
-    icon: <PiCoatHangerFill />,
+    name: "Ground water Level",
+    icon: <GiGroundSprout />,
   },
   {
-    name: "Iron",
-    icon: <TbIroning3 />,
+    name: "Square Feet",
+    icon: <FaRuler />,
   },
   {
-    name: "TV",
-    icon: <PiTelevisionFill />,
+    name: "Acre",
+    icon: <FaMap />,
   },
   {
-    name: "Dedicated workspace",
-    icon: <BsPersonWorkspace />
+    name: "Soil Moisture",
+    icon: <GiDroplets />
   },
   {
-    name: "Air Conditioning",
-    icon: <BsSnow />,
+    name: "Water Reservoir",
+    icon: <GiWaterTank />,
   },
   {
-    name: "Heating",
-    icon: <GiHeatHaze />,
+    name: "Rock Type",
+    icon: <GiStonePile />,
   },
   {
-    name: "Security cameras",
-    icon: <GiCctvCamera />,
+    name: "Land Type",
+    icon: <GiEarthAmerica/>,
   },
   {
-    name: "Fire extinguisher",
-    icon: <FaFireExtinguisher />,
+    name: "Land Degradation",
+    icon: <FaTree/>,
   },
   {
-    name: "First Aid",
-    icon: <BiSolidFirstAid />,
+    name: "Land Tenure",
+    icon: <FaMapMarkedAlt />,
   },
   {
-    name: "Wifi",
-    icon: <BiWifi />,
+    name: "Erosion Rate",
+    icon: <FaLeaf />,
   },
   {
-    name: "Cooking set",
-    icon: <FaKitchenSet />,
+    name: "Cultural LandMarks",
+    icon: <MdLineStyle />,
   },
   {
-    name: "Refrigerator",
-    icon: <BiSolidFridge />,
+    name: "Market Value",
+    icon: <FaMoneyBill1Wave />,
   },
   {
-    name: "Microwave",
-    icon: <MdMicrowave />,
+    name: "Conservation Area",
+    icon: <GiForestCamp />,
   },
   {
-    name: "Stove",
-    icon: <GiToaster />,
+    name: "Economic Value",
+    icon: <GiMoneyStack />,
   },
   {
-    name: "Barbecue grill",
-    icon: <GiBarbecue />,
+    name: "Landforms",
+    icon: <GiSeaCliff />,
   },
   {
-    name: "Outdoor dining area",
-    icon: <FaUmbrellaBeach />,
+    name: "Urban Area",
+    icon: < FaCity/>,
   },
   {
-    name: "Private patio or Balcony",
-    icon: <MdBalcony />,
+    name: "Rural Area",
+    icon: <GiVillage />,
   },
   {
-    name: "Camp fire",
-    icon: <GiCampfire />,
+    name: "Industrial Area",
+    icon: <GiFactory />,
   },
   {
-    name: "Garden",
-    icon: <MdYard />,
+    name: "Certificates",
+    icon: <FaCertificate />,
   },
   {
-    name: "Free parking",
-    icon: <AiFillCar />,
+    name: "Bio Diversity",
+    icon: <GiHedgehog />
   },
   {
-    name: "Self check-in",
-    icon: <FaKey />
-  },
-  {
-    name: " Pet allowed",
-    icon: <MdPets />
+    name: "FAR or FSI",
+    icon: < GiPencilRuler/>
   }
 ];

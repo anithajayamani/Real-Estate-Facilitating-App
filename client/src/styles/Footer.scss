@@ -4,12 +4,16 @@
 .footer {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   gap: 50px;
-  padding: 10px 70px;
+  padding: 20px 70px;
+  background-color: #1a1a1a;
+  color: white;
 
   @include lg {
-    padding: 10px 30px;
+    padding: 20px 30px;
+    flex-direction: column;
+    align-items: center;
   }
 
   &_left {
@@ -18,49 +22,46 @@
     img {
       max-width: 150px;
       margin-bottom: 20px;
+      transition: transform 0.3s ease-in-out;
+
+      &:hover {
+        transform: scale(1.1);
+      }
     }
 
-    &_socials {
-      display: flex;
-      gap: 25px;
-      margin-top: 20px;
-
-      &_icon {
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        background-color: $pinkred;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        cursor: pointer;
-        transition: all 0.5s ease-in-out;
-
-        &:hover {
-          transform: scale(1.2);
-        }
-      }
+    .copyright {
+      font-size: 14px;
+      color: #888;
     }
   }
 
   &_center {
-    text-decoration: none;
+    h3 {
+      margin-bottom: 10px;
+      font-size: 1.5rem;
+    }
 
     ul {
       list-style: none;
       margin-top: 20px;
-      cursor: pointer;
+      padding: 0;
 
-      li:hover {
-        color: $pinkred
-      }
-
-      a {
-        text-decoration: none;
-        color: black;
+      li {
+        margin: 10px 0;
+        transition: color 0.3s ease-in-out;
 
         &:hover {
           color: $pinkred;
+        }
+
+        a {
+          text-decoration: none;
+          color: white;
+          transition: color 0.3s ease-in-out;
+
+          &:hover {
+            color: $pinkred;
+          }
         }
       }
     }
@@ -75,14 +76,35 @@
 
     h3 {
       margin-bottom: 20px;
+      font-size: 1.5rem;
     }
 
     &_info {
       display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+      transition: color 0.3s ease-in-out;
+
+      &:hover {
+        color: $pinkred;
+      }
+
+      svg {
+        margin-right: 10px;
+      }
 
       p {
-        margin-left: 20px;
-        margin-bottom: 15px;
+        margin: 0;
+      }
+    }
+
+    img {
+      max-width: 100%;
+      margin-top: 20px;
+      transition: transform 0.3s ease-in-out;
+
+      &:hover {
+        transform: scale(1.1);
       }
     }
 
@@ -90,4 +112,49 @@
       display: none;
     }
   }
+}
+
+/* Adding a subtle fade-in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.footer {
+  animation: fadeIn 1s ease-in-out;
+}
+
+/* Adding hover effects for links and icons */
+.footer a {
+  position: relative;
+  display: inline-block;
+  text-decoration: none;
+  color: inherit;
+  overflow: hidden;
+
+  &:before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background-color: $pinkred;
+    bottom: 0;
+    left: 0;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out;
+  }
+
+  &:hover:before {
+    transform: translateX(0);
+  }
+}
+
+/* Adding a background gradient and shadow effect */
+.footer {
+  background: linear-gradient(135deg, #1a1a1a 0%, #333 100%);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }

@@ -1,8 +1,7 @@
 import "../styles/CreateListing.scss";
 import Navbar from "../components/Navbar";
 import { categories, types, facilities } from "../data";
-
-import { RemoveCircleOutline, AddCircleOutline } from "@mui/icons-material";
+import { Switch } from '@mui/material';
 import variables from "../styles/variables.scss";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import { IoIosImages } from "react-icons/io";
@@ -19,7 +18,7 @@ const CreateListing = () => {
   /* LOCATION */
   const [formLocation, setFormLocation] = useState({
     streetAddress: "",
-    aptSuite: "",
+    DtSt: "",
     city: "",
     province: "",
     country: "",
@@ -34,10 +33,10 @@ const CreateListing = () => {
   };
 
   /* BASIC COUNTS */
-  const [guestCount, setGuestCount] = useState(1);
-  const [bedroomCount, setBedroomCount] = useState(1);
-  const [bedCount, setBedCount] = useState(1);
-  const [bathroomCount, setBathroomCount] = useState(1);
+  const [dtcpCertificate, setDtcpCertificate] = useState(false);
+  const [absoluteSaleDeed, setAbsoluteSaleDeed] = useState(false);
+  const [khataCertificate, setKhataCertificate] = useState(false);
+  const [propertyTaxReceipt, setPropertyTaxReceipt] = useState(false);
 
   /* AMENITIES */
   const [amenities, setAmenities] = useState([]);
@@ -78,9 +77,9 @@ const CreateListing = () => {
 
   /* DESCRIPTION */
   const [formDescription, setFormDescription] = useState({
-    title: "",
-    description: "",
-    highlight: "",
+    types: "",
+    squarefeet: "",
+    landfacing: "",
     highlightDesc: "",
     price: 0,
   });
@@ -93,6 +92,21 @@ const CreateListing = () => {
     });
   };
 
+  /* CONTACT INFORMATION */
+  const [contactInfo, setContactInfo] = useState({
+    contactName: "",
+    contactPhone: "",
+    contactEmail: "",
+  });
+
+  const handleChangeContactInfo = (e) => {
+    const { name, value } = e.target;
+    setContactInfo({
+      ...contactInfo,
+      [name]: value,
+    });
+  };
+
   const creatorId = useSelector((state) => state.user._id);
 
   const navigate = useNavigate();
@@ -101,28 +115,31 @@ const CreateListing = () => {
     e.preventDefault();
 
     try {
-      /* Create a new FormData onject to handle file uploads */
+      /* Create a new FormData object to handle file uploads */
       const listingForm = new FormData();
       listingForm.append("creator", creatorId);
       listingForm.append("category", category);
       listingForm.append("type", type);
       listingForm.append("streetAddress", formLocation.streetAddress);
-      listingForm.append("aptSuite", formLocation.aptSuite);
+      listingForm.append("DtSt", formLocation.DtSt);
       listingForm.append("city", formLocation.city);
       listingForm.append("province", formLocation.province);
       listingForm.append("country", formLocation.country);
-      listingForm.append("guestCount", guestCount);
-      listingForm.append("bedroomCount", bedroomCount);
-      listingForm.append("bedCount", bedCount);
-      listingForm.append("bathroomCount", bathroomCount);
+      listingForm.append("dtcpCertificate", dtcpCertificate);
+      listingForm.append("absoluteSaleDeed", absoluteSaleDeed);
+      listingForm.append("khataCertificate", khataCertificate);
+      listingForm.append("propertyTaxReceipt", propertyTaxReceipt);
       listingForm.append("amenities", amenities);
-      listingForm.append("title", formDescription.title);
-      listingForm.append("description", formDescription.description);
-      listingForm.append("highlight", formDescription.highlight);
+      listingForm.append("types", formDescription.types);
+      listingForm.append("squarefeet", formDescription.squarefeet);
+      listingForm.append("landfacing", formDescription.landfacing);
       listingForm.append("highlightDesc", formDescription.highlightDesc);
       listingForm.append("price", formDescription.price);
+      listingForm.append("contactName", contactInfo.contactName);
+      listingForm.append("contactPhone", contactInfo.contactPhone);
+      listingForm.append("contactEmail", contactInfo.contactEmail);
 
-      /* Append each selected photos to the FormData object */
+      /* Append each selected photo to the FormData object */
       photos.forEach((photo) => {
         listingForm.append("listingPhotos", photo);
       });
@@ -140,12 +157,13 @@ const CreateListing = () => {
       console.log("Publish Listing failed", err.message);
     }
   };
+
   return (
     <>
       <Navbar />
 
       <div className="create-listing">
-        <h1>Publish Your Place</h1>
+        <h1>Publish Your Land</h1>
         <form onSubmit={handlePost}>
           <div className="create-listing_step1">
             <h2>Step 1: Tell us about your place</h2>
@@ -166,7 +184,7 @@ const CreateListing = () => {
               ))}
             </div>
 
-            <h3>What type of place will guests have?</h3>
+            <h3>What type of place will Buyers Want?</h3>
             <div className="type-list">
               {types?.map((item, index) => (
                 <div
@@ -200,12 +218,12 @@ const CreateListing = () => {
 
             <div className="half">
               <div className="location">
-                <p>Apartment, Suite, etc. (if applicable)</p>
+                <p>District and State</p>
                 <input
                   type="text"
-                  placeholder="Apt, Suite, etc. (if applicable)"
-                  name="aptSuite"
-                  value={formLocation.aptSuite}
+                  placeholder="District and State"
+                  name="DtSt"
+                  value={formLocation.DtSt}
                   onChange={handleChangeLocation}
                   required
                 />
@@ -247,115 +265,63 @@ const CreateListing = () => {
                 />
               </div>
             </div>
+            <br/>
 
-            <h3>Share some basics about your place</h3>
             <div className="basics">
               <div className="basic">
-                <p>Guests</p>
-                <div className="basic_count">
-                  <RemoveCircleOutline
-                    onClick={() => {
-                      guestCount > 1 && setGuestCount(guestCount - 1);
-                    }}
-                    sx={{
-                      fontSize: "25px",
-                      cursor: "pointer",
-                      "&:hover": { color: variables.pinkred },
-                    }}
-                  />
-                  <p>{guestCount}</p>
-                  <AddCircleOutline
-                    onClick={() => {
-                      setGuestCount(guestCount + 1);
-                    }}
-                    sx={{
-                      fontSize: "25px",
-                      cursor: "pointer",
-                      "&:hover": { color: variables.pinkred },
-                    }}
-                  />
-                </div>
+                <p>DTCP Certificate</p>
+                <Switch
+                  checked={dtcpCertificate}
+                  onChange={() => setDtcpCertificate(!dtcpCertificate)}
+                  sx={{
+                    '& .MuiSwitch-switchBase.Mui-checked': { color: variables.pinkred },
+                    '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
+                      backgroundColor: variables.pinkred,
+                    },
+                  }}
+                />
               </div>
 
               <div className="basic">
-                <p>Bedrooms</p>
-                <div className="basic_count">
-                  <RemoveCircleOutline
-                    onClick={() => {
-                      bedroomCount > 1 && setBedroomCount(bedroomCount - 1);
-                    }}
-                    sx={{
-                      fontSize: "25px",
-                      cursor: "pointer",
-                      "&:hover": { color: variables.pinkred },
-                    }}
-                  />
-                  <p>{bedroomCount}</p>
-                  <AddCircleOutline
-                    onClick={() => {
-                      setBedroomCount(bedroomCount + 1);
-                    }}
-                    sx={{
-                      fontSize: "25px",
-                      cursor: "pointer",
-                      "&:hover": { color: variables.pinkred },
-                    }}
-                  />
-                </div>
+                <p>Absolute sale deed and title deed</p>
+                <Switch
+                  checked={absoluteSaleDeed}
+                  onChange={() => setAbsoluteSaleDeed(!absoluteSaleDeed)}
+                  sx={{
+                    '& .MuiSwitch-switchBase.Mui-checked': { color: variables.pinkred },
+                    '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
+                      backgroundColor: variables.pinkred,
+                    },
+                  }}
+                />
               </div>
 
               <div className="basic">
-                <p>Beds</p>
-                <div className="basic_count">
-                  <RemoveCircleOutline
-                    onClick={() => {
-                      bedCount > 1 && setBedCount(bedCount - 1);
-                    }}
-                    sx={{
-                      fontSize: "25px",
-                      cursor: "pointer",
-                      "&:hover": { color: variables.pinkred },
-                    }}
-                  />
-                  <p>{bedCount}</p>
-                  <AddCircleOutline
-                    onClick={() => {
-                      setBedCount(bedCount + 1);
-                    }}
-                    sx={{
-                      fontSize: "25px",
-                      cursor: "pointer",
-                      "&:hover": { color: variables.pinkred },
-                    }}
-                  />
-                </div>
+                <p>Khata Certificate</p>
+                <Switch
+                  checked={khataCertificate}
+                  onChange={() => setKhataCertificate(!khataCertificate)}
+                  sx={{
+                    '& .MuiSwitch-switchBase.Mui-checked': { color: variables.pinkred },
+                    '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
+                      backgroundColor: variables.pinkred,
+                    },
+                  }}
+                />
               </div>
 
               <div className="basic">
-                <p>Bathrooms</p>
-                <div className="basic_count">
-                  <RemoveCircleOutline
-                    onClick={() => {
-                      bathroomCount > 1 && setBathroomCount(bathroomCount - 1);
-                    }}
-                    sx={{
-                      fontSize: "25px",
-                      cursor: "pointer",
-                      "&:hover": { color: variables.pinkred },
-                    }}
-                  />
-                  <p>{bathroomCount}</p>
-                  <AddCircleOutline
-                    onClick={() => {
-                      setBathroomCount(bathroomCount + 1);
-                    }}
-                    sx={{
-                      fontSize: "25px",
-                      cursor: "pointer",
-                      "&:hover": { color: variables.pinkred },
-                    }}
-                  />
-                </div>
+                <p>Receipt of property tax</p>
+                <Switch
+                  checked={propertyTaxReceipt}
+                  onChange={() => setPropertyTaxReceipt(!propertyTaxReceipt)}
+                  sx={{
+                    '& .MuiSwitch-switchBase.Mui-checked': { color: variables.pinkred },
+                    '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
+                      backgroundColor: variables.pinkred,
+                    },
+                  }}
+                />
               </div>
             </div>
           </div>
@@ -410,35 +376,33 @@ const CreateListing = () => {
 
                     {photos.length >= 1 && (
                       <>
-                        {photos.map((photo, index) => {
-                          return (
-                            <Draggable
-                              key={index}
-                              draggableId={index.toString()}
-                              index={index}
-                            >
-                              {(provided) => (
-                                <div
-                                  className="photo"
-                                  ref={provided.innerRef}
-                                  {...provided.draggableProps}
-                                  {...provided.dragHandleProps}
+                        {photos.map((photo, index) => (
+                          <Draggable
+                            key={index}
+                            draggableId={index.toString()}
+                            index={index}
+                          >
+                            {(provided) => (
+                              <div
+                                className="photo"
+                                ref={provided.innerRef}
+                                {...provided.draggableProps}
+                                {...provided.dragHandleProps}
+                              >
+                                <img
+                                  src={URL.createObjectURL(photo)}
+                                  alt="place"
+                                />
+                                <button
+                                  type="button"
+                                  onClick={() => handleRemovePhoto(index)}
                                 >
-                                  <img
-                                    src={URL.createObjectURL(photo)}
-                                    alt="place"
-                                  />
-                                  <button
-                                    type="button"
-                                    onClick={() => handleRemovePhoto(index)}
-                                  >
-                                    <BiTrash />
-                                  </button>
-                                </div>
-                              )}
-                            </Draggable>
-                          );
-                        })}
+                                  <BiTrash />
+                                </button>
+                              </div>
+                            )}
+                          </Draggable>
+                        ))}
                         <input
                           id="image"
                           type="file"
@@ -455,37 +419,38 @@ const CreateListing = () => {
                         </label>
                       </>
                     )}
+                    {provided.placeholder}
                   </div>
                 )}
               </Droppable>
             </DragDropContext>
 
-            <h3>What make your place attractive and exciting?</h3>
+            <h3>What makes your place attractive and exciting?</h3>
             <div className="description">
-              <p>Title</p>
+              <p>Land and Soil Type</p>
               <input
                 type="text"
-                placeholder="Title"
-                name="title"
-                value={formDescription.title}
+                placeholder="Land and Soil Type"
+                name="types"
+                value={formDescription.types}
                 onChange={handleChangeDescription}
                 required
               />
-              <p>Description</p>
+              <p>Square feet </p>
               <textarea
                 type="text"
-                placeholder="Description"
-                name="description"
-                value={formDescription.description}
+                placeholder="Square feet"
+                name="squarefeet"
+                value={formDescription.squarefeet}
                 onChange={handleChangeDescription}
                 required
               />
-              <p>Highlight</p>
+              <p>Land Facing Direction</p>
               <input
                 type="text"
-                placeholder="Highlight"
-                name="highlight"
-                value={formDescription.highlight}
+                placeholder="Land Facing Direction"
+                name="landfacing"
+                value={formDescription.landfacing}
                 onChange={handleChangeDescription}
                 required
               />
@@ -499,7 +464,7 @@ const CreateListing = () => {
                 required
               />
               <p>Now, set your PRICE</p>
-              <span>$</span>
+              <span>₹</span>
               <input
                 type="number"
                 placeholder="100"
@@ -509,6 +474,46 @@ const CreateListing = () => {
                 className="price"
                 required
               />
+            </div>
+          </div>
+
+          <div className="create-listing_step3">
+            <h2>Step 3: Add your contact information</h2>
+            <hr />
+            <div className="contact-info">
+              <div className="contact-field">
+                <p>Name</p>
+                <input
+                  type="text"
+                  placeholder="Name"
+                  name="contactName"
+                  value={contactInfo.contactName}
+                  onChange={handleChangeContactInfo}
+                  required
+                />
+              </div>
+              <div className="contact-field">
+                <p>Phone Number</p>
+                <input
+                  type="tel"
+                  placeholder="Contact Phone"
+                  name="contactPhone"
+                  value={contactInfo.contactPhone}
+                  onChange={handleChangeContactInfo}
+                  required
+                />
+              </div>
+              <div className="contact-field">
+                <p>Email Id</p>
+                <input
+                  type="email"
+                  placeholder="Email"
+                  name="contactEmail"
+                  value={contactInfo.contactEmail}
+                  onChange={handleChangeContactInfo}
+                  required
+                />
+              </div>
             </div>
           </div>
 

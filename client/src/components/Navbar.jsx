@@ -22,7 +22,7 @@ const Navbar = () => {
   return (
     <div className="navbar">
       <a href="/">
-        <img src="/assets/logo.png" alt="logo" />
+        <img src="/assets/landhand.png" alt="logo" />
       </a>
 
       <div className="navbar_search">
@@ -79,7 +79,7 @@ const Navbar = () => {
 
         {dropdownMenu && user && (
           <div className="navbar_right_accountmenu">
-            <Link to={`/${user._id}/trips`}>Trip List</Link>
+            <Link to={`/${user._id}/trips`}>Rent List</Link>
             <Link to={`/${user._id}/wishList`}>Wish List</Link>
             <Link to={`/${user._id}/properties`}>Property List</Link>
             <Link to={`/${user._id}/reservations`}>Reservation List</Link>

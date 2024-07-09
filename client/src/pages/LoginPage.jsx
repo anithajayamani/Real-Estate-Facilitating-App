@@ -1,46 +1,44 @@
 import React, { useState } from "react";
-import "../styles/Login.scss"
+import "../styles/Login.scss";
 import { setLogin } from "../redux/state";
-import { useDispatch } from "react-redux"
-import { useNavigate } from "react-router-dom"
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [role, setRole] = useState("");
 
-  const dispatch = useDispatch()
-
-  const navigate = useNavigate()
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
     try {
-      const response = await fetch ("http://localhost:3001/auth/login", {
+      const response = await fetch("http://localhost:3001/auth/login", {
         method: "POST",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email, password })
-      })
+        body: JSON.stringify({ email, password, role }),
+      });
 
-      /* Get data after fetching */
-      const loggedIn = await response.json()
+      const loggedIn = await response.json();
 
       if (loggedIn) {
-        dispatch (
+        dispatch(
           setLogin({
             user: loggedIn.user,
-            token: loggedIn.token
+            token: loggedIn.token,
           })
-        )
-        navigate("/")
+        );
+        navigate("/");
       }
-
     } catch (err) {
-      console.log("Login failed", err.message)
+      console.log("Login failed", err.message);
     }
-  }
+  };
 
   return (
     <div className="login">
@@ -60,6 +58,20 @@ const LoginPage = () => {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
+          <div className="role_container">
+            <div
+              className={`role_box ${role === "seller" ? "selected" : ""}`}
+              onClick={() => setRole("seller")}
+            >
+              Seller
+            </div>
+            <div
+              className={`role_box ${role === "buyer" ? "selected" : ""}`}
+              onClick={() => setRole("buyer")}
+            >
+              Buyer
+            </div>
+          </div>
           <button type="submit">LOG IN</button>
         </form>
         <a href="/register">Don't have an account? Sign In Here</a>

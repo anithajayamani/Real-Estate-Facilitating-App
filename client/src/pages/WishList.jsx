@@ -22,6 +22,9 @@ const WishList = () => {
             country,
             category,
             type,
+            contactName,
+            contactPhone,
+            contactEmail,
             price,
             booking = false,
           }) => (
@@ -35,6 +38,9 @@ const WishList = () => {
               category={category}
               type={type}
               price={price}
+              contactName={contactName}
+              contactPhone={contactPhone}
+              contactEmail={contactEmail}
               booking={booking}
             />
           )

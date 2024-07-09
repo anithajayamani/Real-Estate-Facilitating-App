@@ -25,19 +25,22 @@ router.post("/create", upload.array("listingPhotos"), async (req, res) => {
       category,
       type,
       streetAddress,
-      aptSuite,
+      DtSt,
       city,
       province,
       country,
-      guestCount,
-      bedroomCount,
-      bedCount,
-      bathroomCount,
+      dtcpCertificate,
+      absoluteSaleDeed,
+      khataCertificate,
+      propertyTaxReceipt,
       amenities,
-      title,
-      description,
-      highlight,
+      types,
+      squarefeet,
+      landfacing,
       highlightDesc,
+      contactName,
+      contactPhone,
+      contactEmail,
       price,
     } = req.body;
 
@@ -54,20 +57,23 @@ router.post("/create", upload.array("listingPhotos"), async (req, res) => {
       category,
       type,
       streetAddress,
-      aptSuite,
+      DtSt,
       city,
       province,
       country,
-      guestCount,
-      bedroomCount,
-      bedCount,
-      bathroomCount,
+      dtcpCertificate,
+      absoluteSaleDeed,
+      khataCertificate,
+      propertyTaxReceipt,
       amenities,
       listingPhotoPaths,
-      title,
-      description,
-      highlight,
+      types,
+      squarefeet,
+      landfacing,
       highlightDesc,
+      contactName,
+      contactPhone,
+      contactEmail,
       price,
     })
 
@@ -106,7 +112,7 @@ router.get("/search/:search", async (req, res) => {
   try {
     let listings = []
 
-    if (search === "all") {
+    if (search === "All") {
       listings = await Listing.find().populate("creator")
     } else {
       listings = await Listing.find({

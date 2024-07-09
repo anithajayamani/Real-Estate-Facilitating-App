@@ -1,18 +1,26 @@
-import "../styles/Footer.scss"
-import { LocationOn, LocalPhone, Email } from "@mui/icons-material"
+import "../styles/Footer.scss";
+import {  LocalPhone, Email } from "@mui/icons-material";
+
 const Footer = () => {
   return (
     <div className="footer">
       <div className="footer_left">
-        <a href="/"><img src="/assets/logo.png" alt="logo" /></a>
+        <a href="/"><img src="/assets/landhand.png" alt="logo" /></a>
+        <div className="copyright">
+          &copy; 2024 landinhand. All rights reserved.
+        </div>
       </div>
 
       <div className="footer_center">
         <h3>Useful Links</h3>
         <ul>
-          <li>About Us</li>
-          <li>Terms and Conditions</li>
-          <li>Return and Refund Policy</li>
+          <li>
+            <a href="about.html">About Us</a>
+          </li>
+          <li>
+            <a href="terms.html">Terms and Conditions</a>
+          </li>
+          
         </ul>
       </div>
 
@@ -20,16 +28,15 @@ const Footer = () => {
         <h3>Contact</h3>
         <div className="footer_right_info">
           <LocalPhone />
-          <p>+1 234 567 890</p>
+          <p>7806837361</p>
         </div>
         <div className="footer_right_info">
           <Email />
-          <p>dreamnest@support.com</p>
+          <p>landinhand@support.com</p>
         </div>
-        <img src="/assets/payment.png" alt="payment" />
       </div>
     </div>
-  )
+  );
 }
 
-export default Footer
+export default Footer;

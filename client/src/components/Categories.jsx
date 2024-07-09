@@ -5,11 +5,11 @@ import { Link } from "react-router-dom";
 const Categories = () => {
   return (
     <div className="categories">
-      <h1>Explore Top Categories</h1>
+      <h1>Explore Top land Categories</h1>
       <p>
-        Explore our wide range of vacation rentals that cater to all types of
-        travelers. Immerse yourself in the local culture, enjoy the comforts of
-        home, and create unforgettable memories in your dream destination.
+      Discover our diverse selection of land listings tailored to various needs and preferences. 
+      Whether you're seeking fertile farmland, serene rural retreats, or prime urban plots, we have the perfect parcel for you. 
+      Invest in your future, unlock new possibilities, and embark on your landownership journey today.
       </p>
 
       <div className="categories_list">

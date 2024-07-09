@@ -98,8 +98,8 @@ const ListingDetails = () => {
       <Navbar />
       
       <div className="listing-details">
-        <div className="title">
-          <h1>{listing.title}</h1>
+        <div className="types">
+          <h1>{listing.types}</h1>
           <div></div>
         </div>
 
@@ -113,14 +113,18 @@ const ListingDetails = () => {
         </div>
 
         <h2>
-          {listing.type} in {listing.city}, {listing.province},{" "}
+          {listing.type} in {listing.streetAddress}, {listing.DtSt},{" "}
           {listing.country}
         </h2>
-        <p>
-          {listing.guestCount} guests - {listing.bedroomCount} bedroom(s) -{" "}
-          {listing.bedCount} bed(s) - {listing.bathroomCount} bathroom(s)
-        </p>
-        <hr />
+        <br/>
+        <h2>Legal Documents:</h2>
+        <ul>
+          <li>{listing.dtcpCertificate} DTCP</li>
+          <li>{listing.absoluteSaleDeed} SaleDeed {" "}</li>
+          <li>{listing.khataCertificate} Khata  </li>
+          <li>{listing.propertyTaxReceipt} Property Tax</li>
+        </ul>
+        <hr/>
 
         <div className="profile">
           <img
@@ -134,14 +138,27 @@ const ListingDetails = () => {
           </h3>
         </div>
         <hr />
+               {/* Add Contact Information */}
+      <h3>Contact Information</h3>
+      <div className="contact-info">
+        <p><strong>Contact Name: </strong> {listing.contactName}</p>
+        <p><strong>Phone Number: </strong> {listing.contactPhone}</p>
+        <p><strong>Email: </strong> {listing.contactEmail}</p>
+      </div>
+      <hr/>
 
         <h3>Description</h3>
-        <p>{listing.description}</p>
-        <hr />
+        <p><strong>Province:</strong> {listing.province}</p>
+        <p><strong>Square Feet:</strong> {listing.squarefeet}</p>
 
-        <h3>{listing.highlight}</h3>
-        <p>{listing.highlightDesc}</p>
+
+        <p><strong>Land Facing:</strong> {listing.landfacing}</p>
+        <p><strong>Highlight:</strong> {listing.highlightDesc}</p>
         <hr />
+       
+      
+          
+        
 
         <div className="booking">
           <div>
@@ -162,20 +179,22 @@ const ListingDetails = () => {
           </div>
 
           <div>
-            <h2>How long do you want to stay?</h2>
+            <h1>Renting Purpose:</h1>
+            <hr/>
+            <h2>How long do you want to rent the land?</h2>
             <div className="date-range-calendar">
               <DateRange ranges={dateRange} onChange={handleSelect} />
               {dayCount > 1 ? (
                 <h2>
-                  ${listing.price} x {dayCount} nights
+                  ₹{listing.price} x {dayCount} nights
                 </h2>
               ) : (
                 <h2>
-                  ${listing.price} x {dayCount} night
+                  ₹{listing.price} x {dayCount} night
                 </h2>
               )}
 
-              <h2>Total price: ${listing.price * dayCount}</h2>
+              <h2>Total price: ₹{listing.price * dayCount}</h2>
               <p>Start Date: {dateRange[0].startDate.toDateString()}</p>
               <p>End Date: {dateRange[0].endDate.toDateString()}</p>
 

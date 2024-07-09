@@ -1,4 +1,4 @@
-const mongoose = require("mongoose")
+const mongoose = require("mongoose");
 
 const ListingSchema = new mongoose.Schema(
   {
@@ -11,15 +11,15 @@ const ListingSchema = new mongoose.Schema(
       required: true,
     },
     type: {
-      type: String,
+      type: [String],
       required: true,
     },
     streetAddress: {
       type: String,
       required: true,
     },
-    aptSuite: {
-      type: String,
+    DtSt: {
+      type: [String],
       required: true,
     },
     city: {
@@ -34,36 +34,36 @@ const ListingSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    guestCount: {
-      type: Number,
+    dtcpCertificate: {
+      type: Boolean,
       required: true,
     },
-    bedroomCount: {
-      type: Number,
+    absoluteSaleDeed: {
+      type: Boolean,
       required: true,
     },
-    bedCount: {
-      type: Number,
+    khataCertificate: {
+      type: Boolean,
       required: true,
     },
-    bathroomCount: {
-      type: Number,
+    propertyTaxReceipt: {
+      type: Boolean,
       required: true,
     },
     amenities: {
       type: Array,
-      default:[]
+      default: []
     },
     listingPhotoPaths: [{ type: String }], // Store photo URLs
-    title: {
+    types: {
+      type: [String],
+      required: true
+    },
+    squarefeet: {
       type: String,
       required: true
     },
-    description: {
-      type: String,
-      required: true
-    },
-    highlight: {
+    landfacing: {
       type: String,
       required: true
     },
@@ -74,10 +74,22 @@ const ListingSchema = new mongoose.Schema(
     price: {
       type: Number,
       required: true,
+    },
+    contactName: {
+      type: String,
+      required: true
+    },
+    contactPhone: {
+      type: String,
+      required: true
+    },
+    contactEmail: {
+      type: String,
+      required: true
     }
   },
-  { timestamps: true}
-)
+  { timestamps: true }
+);
 
-const Listing = mongoose.model("Listing", ListingSchema )
-module.exports = Listing
+const Listing = mongoose.model("Listing", ListingSchema);
+module.exports = Listing;
